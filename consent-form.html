@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consent Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body id="top">
+    <!-- Bootstrap NavBar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            <span class="menu-collapsed">Smart Therapy PC</span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#top">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#top">
+                        <i class="fas fa-comment-dots"></i> Chat
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#top">
+                        <i class="fas fa-sign-out-alt"></i> Sign Out
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav><!-- NavBar END -->
+
+    <!-- Bootstrap row -->
+    <div class="row" id="body-row">
+        <!-- Sidebar -->
+        <div id="sidebar-container" class="sidebar-expanded d-none d-md-block">
+            <ul class="list-group">
+                <a href="index.html" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-tachometer-alt fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Dashboard</span>
+                    </div>
+                </a>
+                <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                    <small>Video Conferencing</small>
+                </li>
+                <a href="authorization.html" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-lock fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Authorization</span>
+                    </div>
+                </a>
+                <a href="consent-form.html" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-handshake fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Consent Form</span>
+                    </div>
+                </a>
+                <a href="intake-form.html" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-file-alt fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Intake Form</span>
+                    </div>
+                </a>
+                <a href="client-logs.html" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-list fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Client Logs</span>
+                    </div>
+                </a>
+                <a href="#top" data-toggle="sidebar-colapse" class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span id="collapse-icon" class="fa fa-2x mr-3"></span>
+                        <span id="collapse-text" class="menu-collapsed">Collapse</span>
+                    </div>
+                </a>
+            </ul><!-- List Group END-->
+        </div><!-- sidebar-container END -->
+        
+        <!-- MAIN -->
+        <div class="col p-4">
+            <form action="/submit" method="post" id="authorization-form">
+                <h3 class="display-4 mb-4">Consent Form for Telehealth</h3>
+        
+                <!-- Container for the numbered list -->
+                <div class="full-width-list mb-4">
+                    <ol>
+                        <li>
+                            I understand that telehealth or teletherapy involves the use of electronic information and communication technologies by a health care provider to deliver services to an individual when he/she is located at a different site than the provider, and hereby consent to receiving health care services via telehealth over a secure video conferencing platform.
+                        </li>
+                        <li>
+                            I understand that the laws that protect privacy and the confidentiality of my medical information also apply to telehealth or teletherapy.
+                        </li>
+                        <li>
+                            I understand that while telehealth or teletherapy treatment has been found to be effective in treating a wide range of disorders, there is no guarantee that all treatment of all clients will be effective.
+                        </li>
+                        <li>
+                            I understand that there are potential risks involving technology, including but not limited to: internet interruptions, and technical difficulties. I understand that technical difficulties with hardware, software, and internet connection may result in service interruption and that the health care provider is not responsible for any technical problems and does not guarantee that services will be available or work as expected.
+                        </li>
+                        <li>
+                            I understand that I am responsible for information security on my computer and in my own physical location. I understand that I am responsible for creating and maintaining my username and password and not sharing these with another person. I understand that I am responsible for ensuring privacy at my own location by being in a private area so other individuals cannot hear my conversation.
+                        </li>
+                        <li>
+                            I understand that my health care provider or I can discontinue the telehealth/teletherapy services if it is felt that this type of service delivery does not benefit my needs.
+                        </li>
+                        <li>
+                            I have read and understand the information provided above regarding telehealth or teletherapy, have discussed it with my health care provider, and all of my questions have been answered to my satisfaction.
+                        </li>
+                    </ol>
+                    
+                </div>
+        
+                <div class="mt-4 mb-4">
+                    <div id="signature-pad" class="border border-dark" style="height: 200px; position: relative;">
+                        <canvas id="canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+                    </div>
+                    <div class="mt-2">
+                        <span>Draw Signature Above</span>
+                        <button type="button" id="clear-signature" class="btn btn-secondary ml-2">Clear</button>
+                    </div>
+                </div>
+                
+                <script>
+                    const canvas = document.getElementById('canvas');
+                    const context = canvas.getContext('2d');
+                    const signaturePad = document.getElementById('signature-pad');
+        
+                    function resizeCanvas() {
+                        canvas.width = signaturePad.clientWidth;
+                        canvas.height = signaturePad.clientHeight;
+                    }
+        
+                    // Initial canvas size adjustment
+                    resizeCanvas();
+        
+                    // Adjust canvas size on window resize
+                    window.addEventListener('resize', resizeCanvas);
+        
+                    let drawing = false;
+        
+                    canvas.addEventListener('mousedown', (e) => {
+                        drawing = true;
+                        context.beginPath();
+                        context.moveTo(e.offsetX, e.offsetY);
+                    });
+        
+                    canvas.addEventListener('mousemove', (e) => {
+                        if (drawing) {
+                            context.lineTo(e.offsetX, e.offsetY);
+                            context.stroke();
+                        }
+                    });
+        
+                    canvas.addEventListener('mouseup', () => {
+                        drawing = false;
+                    });
+        
+                    document.getElementById('clear-signature').addEventListener('click', () => {
+                        context.clearRect(0, 0, canvas.width, canvas.height);
+                    });
+                </script>
+        
+                <div class="form-group mt-4">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="termsCheckbox" required>
+                        <label class="form-check-label" for="termsCheckbox">I have read and agree to the terms.</label>
+                    </div>
+                </div>
+        
+                <button type="submit" class="btn btn-primary mt-3">Continue</button>
+            </form><!-- Form END -->
+        </div><!-- Main Col END -->
+        
+        
+    </div><!-- body-row END -->
+    
+    <!-- Bootstrap and jQuery scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="js/scripts.js"></script>
+</body>
+</html>
