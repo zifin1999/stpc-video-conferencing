@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consent Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body id="top">
+    <!-- Bootstrap NavBar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            <span class="menu-collapsed">Smart Therapy PC</span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-comment-dots"></i> Chat
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-sign-out-alt"></i> Sign Out
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav><!-- NavBar END -->
+
+    <!-- MAIN -->
+    <div class="container-fluid wait-bg">
+        <div class="row justify-content-center align-items-start" style="height: 100%;">
+            <div class="col-6 col-md-4 mt-5">
+                <div class="bg-white p-4 rounded shadow">
+                    <h4 class="text-center">Waiting Room</h4>
+                    <div class="text-center py-2">
+                        <p>Please wait for the provider to join the session. Thank you!</p>
+                        <p>Please wait until your host arrives... Thank you!</p>
+                    </div>
+                    <div class="text-center py-2">
+                        <span style="text-align: center;">Having trouble connecting? <a href="#">Test your setup here</a></span>
+                    </div>
+                </div>
+            </div><!-- Main Col END -->
+        </div><!-- row END -->
+
+        <!-- Circular Buttons -->
+        <button class="circular-button left-button" id="speakerButton">
+            <i class="fas fa-volume-up"></i>
+        </button>
+        <button class="circular-button right-button">
+            <i class="fas fa-question"></i>
+        </button>
+    </div><!-- container-fluid END -->
+    
+    <!-- Bootstrap and jQuery scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script>
+        document.getElementById("speakerButton").addEventListener("click", function() {
+            const icon = this.querySelector("i");
+            if (icon.classList.contains("fa-volume-up")) {
+                icon.classList.remove("fa-volume-up");
+                icon.classList.add("fa-volume-mute");
+            } else {
+                icon.classList.remove("fa-volume-mute");
+                icon.classList.add("fa-volume-up");
+            }
+        });
+    </script>
+</body>
+</html>

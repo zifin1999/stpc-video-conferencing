@@ -144,5 +144,32 @@
     pointer-events: none;
 }
 
+/* waiting room css */
+.circular-button {
+    position: fixed; /* Change to fixed for sticky effect */
+    bottom: 20px; /* Distance from bottom */
+    width: 60px; /* Width of the button */
+    height: 60px; /* Height of the button */
+    border-radius: 50%; /* Makes it circular */
+    border: none; /* Remove default border */
+    color: white; /* Text color */
+    font-size: 24px; /* Icon size */
+    z-index: 1000; /* Ensure they are above other content */
+}
+.left-button {
+    left: 20px; /* Distance from left */
+    background-color: #007bff; /* Button color */
+}
+.right-button {
+    right: 20px; /* Distance from right */
+    background-color: #28a745; /* Button color */
+}
+
+.container-fluid.wait-bg {
+    background: url('../assets/waiting-room-bg.jpg') no-repeat center center; 
+    background-size: cover; /* Makes the image cover the entire element */
+    min-height: calc(100vh - 56px); 
+    position: relative;
+}
 
 
