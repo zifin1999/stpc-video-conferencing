@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Logs</title>
+    <title>Video Conferencing</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome CSS -->
@@ -46,16 +46,20 @@
     <div class="row" id="body-row">
         <!-- Sidebar -->
         <div id="sidebar-container" class="sidebar-expanded d-none d-md-block">
+            <!-- Bootstrap List Group -->
             <ul class="list-group">
+                <!-- Menu with submenu -->
                 <a href="index.html" class="bg-dark list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-tachometer-alt fa-fw mr-3"></span>
                         <span class="menu-collapsed">Dashboard</span>
                     </div>
                 </a>
+                <!-- Separator with title -->
                 <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
                     <small>Video Conferencing</small>
                 </li>
+                <!-- /END Separator -->
                 <a href="authorization.html" class="bg-dark list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-lock fa-fw mr-3"></span>
@@ -86,6 +90,18 @@
                         <span class="menu-collapsed">Waiting Room</span>
                     </div>
                 </a>
+                <a href="vid-session-client.html" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fas fa-video fa-fw mr-3"></span> <!-- Updated to video camera icon -->
+                        <span class="menu-collapsed">Video (Client)</span>
+                    </div>
+                </a>
+                <a href="therapist-screen-share.html" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fas fa-desktop fa-fw mr-3"></span> <!-- Updated to video camera icon -->
+                        <span class="menu-collapsed">Screen Share (Therapist)</span>
+                    </div>
+                </a>               
                 <a href="#top" data-toggle="sidebar-colapse" class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span id="collapse-icon" class="fa fa-2x mr-3"></span>

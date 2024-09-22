@@ -2,90 +2,134 @@
     margin-left: 0;
     margin-right: 0;
 }
+
 #sidebar-container {
     min-height: 100vh;
     background-color: #333;
     padding: 0;
 }
 
-/* Sidebar sizes when expanded and collapsed */
-.sidebar-expanded {
-    width: 230px;
-}
-.sidebar-collapsed {
-    width: 60px;
-}
-
-/* Menu item */
-#sidebar-container .list-group a {
-    height: 50px;
+/* Sidebar sizes */
+.sidebar {
+    position: fixed;
+    left: 0; /* Keep the sidebar in view */
+    top: 56px; /* Adjust based on your navbar height */
+    height: calc(100vh - 56px); /* Full height minus navbar height */
+    width: 250px; /* Fixed width */
+    background-color: #333;
     color: white;
+    overflow-y: auto; /* Enable vertical scrolling for overflowing content */
+    transition: left 0.3s ease;
+    z-index: 1000; /* Ensure it stays above other content */
+    padding: 10px; /* Add some padding for better spacing */
 }
 
-/* Submenu item */
-#sidebar-container .list-group .sidebar-submenu a {
-    height: 45px;
+#sidebar-container .list-group a {
+    height: auto; /* Allow height to adjust based on content */
+    color: white;
+    padding: 10px; /* Add padding for better clickability */
+}
+
+.sidebar .list-group .sidebar-submenu a {
+    height: auto; /* Allow height to adjust for submenu items */
     padding-left: 30px;
 }
+
+/* General button styles */
+.btn-outline-yes, .btn-outline-no {
+    border-radius: 4px;
+    border-width: 2px;
+    border-style: solid;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+/* Waiting room css */
+.circular-button {
+    position: fixed; /* Change to fixed for sticky effect */
+    bottom: 20px; /* Distance from bottom */
+    width: 60px; /* Width of the button */
+    height: 60px; /* Height of the button */
+    border-radius: 50%; /* Makes it circular */
+    border: none; /* Remove default border */
+    color: white; /* Text color */
+    font-size: 24px; /* Icon size */
+    z-index: 1000; /* Ensure they are above other content */
+}
+
+.container-fluid.wait-bg {
+    background: url('../assets/waiting-room-bg.jpg') no-repeat center center; 
+    background-size: cover; /* Makes the image cover the entire element */
+    min-height: calc(100vh - 56px); 
+}
+
+#bottom-dock {
+    position: fixed;
+    bottom: 30px; /* Dock a little bit above the bottom edge */
+    left: 50%;
+    transform: translateX(-50%); /* Centers the dock horizontally */
+    color: white;
+    padding: 10px;
+    border-radius: 30px;
+    display: flex;
+    gap: 12px;
+}
+
+.video-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dock-button {
+    background-color: #3c4043; /* Default background color for other buttons */
+    border: none;
+    color: white; /* Default icon color */
+    font-size: 16px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.dock-button:hover {
+    background-color: #44474a; /* Hover effect for other buttons */
+}
+
+.exit-button {
+    background-color: red; /* Red background for exit button */
+}
+
+.exit-button:hover {
+    background-color: rgb(210, 0, 0); /* Darker red on hover for exit button */
+}
+
+/* Muted state for dock buttons */
+.dock-button.muted {
+    background-color: red; /* Red background when muted */
+}
+
+/* New styles for active state */
+.dock-button.active {
+    background-color: red; /* Background color when active */
+}
+
 .sidebar-submenu {
     font-size: 0.9rem;
 }
 
 /* Separators */
-.sidebar-separator-title {
-    background-color: #333;
-    height: 35px;
-}
-.sidebar-separator {
-    background-color: #333;
-    height: 25px;
-}
+.sidebar-separator-title,
+.sidebar-separator,
 .logo-separator {
     background-color: #333;
-    height: 60px;
 }
 
-/* Closed submenu icon */
-#sidebar-container .list-group .list-group-item[aria-expanded="false"] .submenu-icon::after {
-    content: "\f0d7";
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    display: inline;
-    text-align: right;
-    padding-left: 10px;
-}
-
-/* Opened submenu icon */
-#sidebar-container .list-group .list-group-item[aria-expanded="true"] .submenu-icon::after {
-    content: "\f0da";
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    display: inline;
-    text-align: right;
-    padding-left: 10px;
-}
-
-
-.full-width-list {
-    width: 100%; /* Full width */
-    max-height: 200px; /* Adjust height as needed */
-    overflow-y: auto;  /* Enable vertical scrolling if content overflows */
-    padding: 10px; /* Optional: Add padding inside the container */
-    border: 1px solid #ddd; /* Optional: Add border for visibility */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-}
-
-.full-width-list ol {
-    margin: 0;
-    padding: 0;
-    list-style-position: inside; /* Adjust list marker position */
-}
-
-.full-width-list li {
-    margin-bottom: 10px; /* Space between list items */
-}
-
-/* Full-width container with padding, border, and scrollbar */
+/* Custom container for main content */
 .custom-container {
     flex: 1;
     border: 1px solid #ddd;
@@ -96,6 +140,7 @@
     box-sizing: border-box;
     max-height: calc(100vh - 120px); /* Adjust the value as needed to fit within the viewport */
 }
+
 
 
 
@@ -281,7 +326,7 @@
 
 .video-feed {
     background-color: aquamarine;
-    height: 17%;
+    height: 150px;
 }
 .btn-group {
     padding: 20px; /* Outer padding */
