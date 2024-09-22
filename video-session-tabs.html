@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Conferencing</title>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet" />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css' rel='stylesheet' />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        /* Additional CSS to keep sidebar static */
+        #sidebar {
+            position: fixed;
+            top: 56px; /* Below the navbar */
+            left: 0;
+            width: 260px; /* Width of the sidebar */
+            height: calc(100% - 56px); /* Full height minus navbar */
+            background-color: #efefef;
+            color: white;
+            z-index: 1000;
+        }
+        #main-content {
+            margin-left: 250px; /* Offset for the sidebar */
+            padding: 20px; /* Padding for the main content */
+        }
+        .nav-link.active {
+            background-color: #21a8d9; /* Active background color */
+            color: white; /* Active text color */
+        }
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto;
+            height: 600px; /* Set a height for the calendar */
+        }
+        .fc-button {
+            background-color: #007bff; /* Change button background color */
+            color: white; /* Change button text color */
+        }
+
+        .fc-button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+
+    </style>
+</head>
+<body id="top">
+    <!-- Bootstrap NavBar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            <span class="menu-collapsed">Smart Therapy PC</span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#top">
+                        <i class="fas fa-comment-dots"></i> Chat
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#top">
+                        <i class="fas fa-sign-out-alt"></i> Sign Out
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav><!-- NavBar END -->
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="video-feed"></div>
+        <!-- First Row of Buttons -->
+        <div class="btn-group d-flex justify-content-center mb-0" role="group" aria-label="Sidebar Buttons">
+            <button type="button" class="btn btn-primary toggle-button" id="sidebarVideoButton" style="margin: 0;">
+                <i class="fas fa-video"></i>
+            </button>
+            <button type="button" class="btn btn-primary toggle-button" id="sidebarMicButton" style="margin: 0;">
+                <i class="fas fa-user"></i>
+            </button>
+            <button type="button" class="btn btn-primary toggle-button" id="sidebarSettingsButton" style="margin: 0;">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <button type="button" class="btn btn-primary toggle-button" id="sidebarChat1Button" style="margin: 0;">
+                <i class="fas fa-arrows-alt"></i>
+            </button>
+            <button type="button" class="btn btn-primary toggle-button" id="sidebarChat2Button" style="margin: 0;">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
+
+        <!-- Second Row of Buttons -->
+        <div class="btn-group d-flex justify-content-center mb-0" style="margin-top: -40px;" role="group" aria-label="Sidebar Buttons">
+            <button type="button" class="btn btn-primary toggle-button" id="sidebarZoomInButton" style="margin: 0;">
+                <i class="fas fa-plus"></i>
+            </button>
+            <button type="button" class="btn btn-primary toggle-button" id="sidebarZoomOutButton" style="margin: 0;">
+                <i class="fas fa-comment-dots"></i>
+            </button>
+            <button type="button" class="btn btn-primary toggle-button" id="sidebarEndSessionButton" style="margin: 0;">
+                <i class="fas fa-comments"></i>
+            </button>
+        </div>
+
+        <div class="text-center mt-4">
+            <button class="btn btn-danger" style="transition: background-color 0.3s; color: white;">
+                <a href="index.html" id="exitButton" style="color: white; text-decoration: none;">
+                    <i class="fas fa-sign-out-alt"></i> End Session
+                </a>
+            </button>
+        </div>
+    </div><!-- Sidebar END -->
+
+    <!-- Main content -->
+<div id="main-content">
+    <!-- New Navbar for Tabs -->
+    <nav class="navbar navbar-expand-md navbar-light bg-light mb-4">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="whiteBoardTab">White Board</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Apps</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Resources</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Videos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Screen Share</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Bookmarks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="scheduleTab">Schedule</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Clients</a>
+            </li>
+        </ul>
+        
+    </nav><!-- Tab Navbar END -->
+
+    <div id="whiteboardContainer" style="display:none;">
+        <div class="button-container">
+            <input type="color" id="colorPicker" value="#000000" class="btn-custom" style="width: 50px; height: 50px;">
+            <button class="btn btn-custom" id="penButton"><i class="fas fa-pencil-alt"></i></button>
+            <button class="btn btn-custom" id="brushButton"><i class="fas fa-paint-brush"></i></button>
+            <button class="btn btn-custom" id="eraserButton"><i class="fas fa-eraser"></i></button>
+            <button class="btn btn-custom" id="undoButton"><i class="fas fa-undo"></i></button>
+            <button class="btn btn-custom" id="clearButton"><i class="fas fa-trash"></i></button>
+        </div>
+        <style>
+            .button-container {
+                margin: 20px 0;
+                display: flex;
+                gap: 2px; /* Gap between buttons */
+            }
+            .btn-custom {
+                background-color: #21a8d9; /* Button background color */
+                color: white; /* White text */
+                width: 50px; /* Fixed width */
+                height: 50px; /* Fixed height */
+                display: flex; /* Center icon */
+                align-items: center; /* Center icon vertically */
+                justify-content: center; /* Center icon horizontally */
+                border-radius: 5px; /* Rounded corners */
+                border: none; /* Remove border */
+                transition: background-color 0.3s; /* Smooth transition for hover */
+            }
+            .btn-custom:hover {
+                background-color: #2bc0e4; /* Lighter background on hover */
+            }
+            canvas {
+                border: 1px solid black;
+                margin-top: 20px;
+                width: 100%;
+                height: 400px;
+            }
+        </style>
+        <canvas id="whiteboard"></canvas>
+        <style>
+            #whiteboardContainer {
+                margin-top: 20px;
+            }
+
+            #whiteboard {
+                border: 1px solid #000;
+                background-color: #fff;
+                width: 100%;
+                height: 500px; /* Adjust as needed */
+            }
+
+        </style>
+    </div><!-- Whiteboard Container -->
+
+    <div id="scheduleContainer" style="display:none;">
+        <div id="calendar"></div> <!-- Calendar container -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: [
+                    // Example events
+                    {
+                        title: 'Meeting',
+                        start: '2024-09-23'
+                    },
+                    {
+                        title: 'Conference',
+                        start: '2024-09-25',
+                        end: '2024-09-27'
+                    }
+                ],
+                eventClick: function(info) {
+                    // Display the event title in an alert or modal
+                    alert('Event: ' + info.event.title);
+                    // If you want a custom modal, you can implement it here instead of alert
+                }
+            });
+            calendar.render();
+        });
+    </script>
+    
+
+</div><!-- Main Content END -->
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('scheduleTab').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('whiteboardContainer').style.display = 'none'; // Hide the whiteboard
+            document.getElementById('scheduleContainer').style.display = 'block'; // Show the schedule
+        });
+
+        document.getElementById('whiteBoardTab').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('whiteboardContainer').style.display = 'block'; // Show whiteboard
+            document.getElementById('scheduleContainer').style.display = 'none'; // Hide schedule
+        });
+        document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                // Remove 'active' class from all links
+                document.querySelectorAll('.navbar-nav .nav-link').forEach(nav => nav.classList.remove('active'));
+                // Add 'active' class to the clicked link
+                this.classList.add('active');
+
+                // Optionally handle schedule tab click to show the div
+                if (this.id === 'scheduleTab') {
+                    document.getElementById('scheduleDiv').style.display = 'block'; // Show your schedule div
+                }
+            });
+        });
+
+    </script>
+    
+    <script>
+        // Whiteboard functionality
+        const canvas = document.getElementById('whiteboard');
+        const ctx = canvas.getContext('2d');
+    
+        let drawing = false;
+        let penMode = true; // Starts with pen mode
+        let brushSize = 2;
+        let color = '#000000';
+        let actions = [];
+        let actionIndex = -1; // Keeps track of the current action state
+    
+        canvas.width = document.getElementById('main-content').clientWidth; // Full width
+        canvas.height = 500; // Set height
+    
+        // Event Listeners
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mousemove', draw);
+        document.getElementById('colorPicker').addEventListener('input', (e) => {
+            color = e.target.value;
+        });
+        document.getElementById('penButton').addEventListener('click', () => {
+            penMode = true;
+            brushSize = 2;
+        });
+        document.getElementById('brushButton').addEventListener('click', () => {
+            penMode = true;
+            brushSize = 10;
+        });
+        document.getElementById('eraserButton').addEventListener('click', () => {
+            penMode = false;
+        });
+        document.getElementById('undoButton').addEventListener('click', undo);
+        document.getElementById('clearButton').addEventListener('click', clearCanvas);
+        document.getElementById('whiteBoardTab').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('whiteboardContainer').style.display = 'block'; // Show whiteboard
+        });
+    
+        function startDrawing(e) {
+            drawing = true;
+            ctx.beginPath();
+            ctx.moveTo(e.offsetX, e.offsetY);
+        }
+    
+        function stopDrawing() {
+            if (drawing) {
+                ctx.closePath();
+                saveCanvasState(); // Save the state after drawing
+                drawing = false;
+            }
+        }
+    
+        function draw(e) {
+            if (!drawing) return;
+            ctx.lineWidth = brushSize;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = penMode ? color : '#ffffff'; // Eraser color
+    
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+        }
+    
+        function saveCanvasState() {
+            if (actionIndex < actions.length - 1) {
+                actions = actions.slice(0, actionIndex + 1); // Remove future actions
+            }
+            actions.push(canvas.toDataURL()); // Save current canvas state
+            actionIndex++;
+        }
+    
+        function undo() {
+            if (actionIndex > 0) {
+                actionIndex--; // Move back one action
+                const imgData = actions[actionIndex];
+                const img = new Image();
+                img.onload = () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+                    ctx.drawImage(img, 0, 0); // Draw the previous state
+                };
+                img.src = imgData;
+            }
+        }
+    
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            actions = []; // Clear action history
+            actionIndex = -1; // Reset action index
+        }
+    </script>
+    
+</body>
+</html>

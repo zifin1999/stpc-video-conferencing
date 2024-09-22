@@ -335,12 +335,13 @@
 }
 
 .btn-group .btn {
-    padding: 10px 3px; /* Button padding */
+    padding: 8px 1px; /* Button padding */
     display: flex; /* Flexbox for the button */
     align-items: center; /* Center icons vertically */
     justify-content: center; /* Center icons horizontally */
-    margin: 0 5px; /* Margin between buttons */
+    margin: 0px; /* Margin between buttons */
     min-width: 50px; /* Optional: Ensure buttons have a minimum width */
+    font-size: 14px;
 }
 
 .dropdown-group select {
