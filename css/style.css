@@ -172,4 +172,148 @@
     position: relative;
 }
 
+#bottom-dock {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    padding: 10px;
+    border-radius: 30px;
+    display: flex;
+    gap: 12px;
+}
+
+.video-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#bottom-dock {
+    position: fixed;
+    bottom: 30px; /* Dock a little bit above the bottom edge */
+    left: 50%;
+    transform: translateX(-50%); /* Centers the dock horizontally */
+}
+
+.dock-button {
+    background-color: #3c4043; /* Default background color for other buttons */
+    border: none;
+    color: white; /* Default icon color */
+    font-size: 16px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.dock-button:hover {
+    background-color: #44474a; /* Hover effect for other buttons */
+}
+
+.dock-button:hover i {
+    color: white; /* Keep the icon white on hover */
+}
+
+.exit-button {
+    background-color: red; /* Red background for exit button */
+}
+
+.exit-button:hover {
+    background-color: rgb(210, 0, 0); /* Darker red on hover for exit button */
+}
+
+/* New styles for active state */
+.dock-button.active {
+    background-color: red; /* Background color when active */
+}
+
+.dock-button.active i {
+    color: white; /* Ensure icon color is white when active */
+}
+
+/* Muted state for dock buttons */
+.dock-button.muted {
+    background-color: red; /* Red background when muted */
+}
+
+/* New styles for active state for settings and chat buttons */
+.dock-button.settings-active,
+.dock-button.chat-active {
+    background-color: #007bff; /* Background color when active */
+}
+
+.dock-button.settings-active i,
+.dock-button.chat-active i {
+    color: white; /* Ensure icon color is white when active */
+}
+
+
+.sidebar {
+    position: fixed;
+    left: -250px; /* Hide sidebar off-screen */
+    top: 56px; /* Adjust this based on your navbar height */
+    height: calc(100% - 56px); /* Full height minus navbar height */
+    width: 250px;
+    background-color: #333;
+    color: white;
+    transition: left 0.3s ease;
+    z-index: 1000; /* Ensure it stays above other content */
+}
+
+.sidebar.open {
+    left: 0; /* Slide in when open */
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    float: right;
+}
+
+.video-feed {
+    background-color: aquamarine;
+    height: 17%;
+}
+.btn-group {
+    padding: 20px; /* Outer padding */
+    display: flex; /* Flexbox layout */
+    justify-content: center; /* Center the buttons */
+}
+
+.btn-group .btn {
+    padding: 10px 3px; /* Button padding */
+    display: flex; /* Flexbox for the button */
+    align-items: center; /* Center icons vertically */
+    justify-content: center; /* Center icons horizontally */
+    margin: 0 5px; /* Margin between buttons */
+    min-width: 50px; /* Optional: Ensure buttons have a minimum width */
+}
+
+.dropdown-group select {
+    width: 100%;
+}
+
+/* Adding padding to the dropdown containers */
+.dropdown-item {
+    padding: 10px 0;
+}
+
+/* Full width for the select dropdowns */
+.dropdown-group select {
+    width: 100%;
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
 

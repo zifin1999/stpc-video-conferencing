@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consent Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body id="top">
+    <!-- Bootstrap NavBar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            <span class="menu-collapsed">Smart Therapy PC</span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#top">
+                        <i class="fas fa-comment-dots"></i> Chat
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#top">
+                        <i class="fas fa-sign-out-alt"></i> Sign Out
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav><!-- NavBar END -->
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <div class="video-feed"></div>
+        <div class="btn-group d-flex justify-content-center" role="group" aria-label="Sidebar Buttons">
+            <button type="button" class="btn btn-primary toggle-button" id="sidebarVideoButton">
+                <i class="fas fa-video"></i>
+            </button>
+            <button type="button" class="btn btn-primary toggle-button" id="sidebarMicButton">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <button type="button" class="btn btn-primary toggle-button">
+                <i class="fas fa-cog"></i>
+            </button>
+            <button type="button" class="btn btn-primary toggle-button">
+                <i class="fas fa-comment-dots"></i>
+            </button>
+        </div>
+        <div class="dropdown-group px-3">
+            <div class="form-group">
+                <select id="microphoneDropdown" class="form-control">
+                    <option selected>Select Microphone</option>
+                    <option>Microphone 1</option>
+                    <option>Microphone 2</option>
+                </select>
+                <select id="cameraDropdown" class="form-control mt-3">
+                    <option selected>Select Video Camera</option>
+                    <option>Camera 1</option>
+                    <option>Camera 2</option>
+                </select>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn btn-danger" style="transition: background-color 0.3s;">
+                <i class="fas fa-sign-out-alt"></i> End Session
+            </button>
+        </div>
+        
+             
+    </div>
+
+    <!-- Bottom Dock for Buttons -->
+    <div id="bottom-dock" class="d-flex justify-content-between align-items-center">
+        <button id="micButton" class="dock-button">
+            <i class="fas fa-microphone"></i>
+        </button>
+        <button id="cameraButton" class="dock-button">
+            <i class="fas fa-video"></i>
+        </button>
+        <button id="settingsButton" class="dock-button">
+            <i class="fas fa-cog"></i>
+        </button>
+        <button id="exitButton" class="dock-button exit-button">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>        
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Function to toggle sidebar and save the state
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("open");
+            
+            // Save the sidebar state in localStorage
+            const isOpen = sidebar.classList.contains("open");
+            localStorage.setItem("sidebarOpen", isOpen ? "true" : "false");
+        }
+    
+        // Add event listener to the settings button
+        document.getElementById("settingsButton").addEventListener("click", function() {
+            toggleSidebar();
+        });
+    
+        // Restore the sidebar state on page load
+        document.addEventListener("DOMContentLoaded", function() {
+            const sidebarState = localStorage.getItem("sidebarOpen");
+            if (sidebarState === "true") {
+                document.getElementById("sidebar").classList.add("open");
+            } else {
+                document.getElementById("sidebar").classList.remove("open");
+            }
+        });
+    
+        // Function to toggle the camera button
+        function toggleCamera(button) {
+            const icon = button.querySelector("i");
+            button.classList.toggle("muted"); // Add/remove muted class
+            icon.classList.toggle("fa-video-slash"); // Toggle icon
+            icon.classList.toggle("fa-video"); // Toggle icon
+        }
+    
+        // Function to toggle the microphone button
+        function toggleMic(button) {
+            const icon = button.querySelector("i");
+            button.classList.toggle("muted"); // Add/remove muted class
+            icon.classList.toggle("fa-microphone-slash"); // Toggle icon
+            icon.classList.toggle("fa-microphone"); // Toggle icon
+        }
+    
+        // Event listeners for sidebar toggle buttons
+        document.getElementById("sidebarVideoButton").addEventListener("click", function() {
+            // Toggle camera functionality
+            toggleCamera(this);
+        });
+    
+        document.getElementById("sidebarMicButton").addEventListener("click", function() {
+            // Toggle microphone functionality
+            toggleMic(this);
+        });
+    </script>
+    
+    
+</body>
+</html>
