@@ -217,7 +217,7 @@
         <div class="popup-content">
             <span class="close">&times;</span>
             <div class="popup-buttons">
-                <h4>Adult Progress Note Mental Health</h4>
+                <h4 id="eventTitle">Event Title</h4>
                 <button class="icon-btn">
                     <i class="fa fa-edit"></i> <!-- Edit icon -->
                 </button>
@@ -229,6 +229,7 @@
             <div class="popup-row">
                 <h5>Jake Kel</h5>
             </div>
+            <p id="eventDescription">Event Description</p> <!-- Add this line -->
             <table class="popup-table">
                 <tr>
                     <th>Header 1</th>
@@ -260,11 +261,8 @@
                     </label><br>
                 </div>
             </div>
-            
         </div>
     </div>
-    
-    
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -286,26 +284,27 @@
                     }
                 ]
 ,
-                eventClick: function(info) {
-                    // Open popup
-                    var popup = document.getElementById('eventPopup');
-                    var eventTitle = document.getElementById('eventTitle');
-                    var eventDescription = document.getElementById('eventDescription');
+eventClick: function(info) {
+    var popup = document.getElementById('eventPopup');
+    var eventTitle = document.getElementById('eventTitle');
+    var eventDescription = document.getElementById('eventDescription');
 
-                    eventTitle.textContent = info.event.title;
-                    eventDescription.textContent = info.event.extendedProps.description || 'No description available';
+    eventTitle.textContent = info.event.title;
+    eventDescription.textContent = info.event.extendedProps.description || 'No description available';
 
-                    popup.style.display = 'block'; // Show the popup
-                }
+    popup.style.display = 'block'; // Show the popup
+}
+
             });
 
             calendar.render();
 
             // Close popup when 'x' is clicked
             var closeBtn = document.querySelector('.popup .close');
-            closeBtn.addEventListener('click', function() {
-                document.getElementById('eventPopup').style.display = 'none'; // Hide the popup
-            });
+closeBtn.addEventListener('click', function() {
+    document.getElementById('eventPopup').style.display = 'none'; // Hide the popup
+});
+
 
             // Optionally, close popup when clicking outside the popup content
             window.addEventListener('click', function(event) {
