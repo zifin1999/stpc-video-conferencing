@@ -35,7 +35,7 @@
             color: white; /* Active text color */
         }
         #calendar {
-            max-width: 900px;
+            max-width: 100%;
             margin: 0 auto;
             height: 600px; /* Set a height for the calendar */
         }
@@ -43,11 +43,9 @@
             background-color: #007bff; /* Change button background color */
             color: white; /* Change button text color */
         }
-
         .fc-button:hover {
             background-color: #0056b3; /* Darker shade on hover */
         }
-
     </style>
 </head>
 <body id="top">
@@ -57,7 +55,6 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#">
-            <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             <span class="menu-collapsed">Smart Therapy PC</span>
         </a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -84,6 +81,7 @@
     <!-- Sidebar -->
     <div id="sidebar">
         <div class="video-feed"></div>
+
         <!-- First Row of Buttons -->
         <div class="btn-group d-flex justify-content-center mb-0" role="group" aria-label="Sidebar Buttons">
             <button type="button" class="btn btn-primary toggle-button" id="sidebarVideoButton" style="margin: 0;">
@@ -105,13 +103,13 @@
 
         <!-- Second Row of Buttons -->
         <div class="btn-group d-flex justify-content-center mb-0" style="margin-top: -40px;" role="group" aria-label="Sidebar Buttons">
-            <button type="button" class="btn btn-primary toggle-button" id="sidebarZoomInButton" style="margin: 0;">
+            <button type="button" class="btn btn-primary toggle-button" id="sidebarZoomInButton" style="margin: 0; background-color: #78c446;">
                 <i class="fas fa-plus"></i>
             </button>
-            <button type="button" class="btn btn-primary toggle-button" id="sidebarZoomOutButton" style="margin: 0;">
+            <button type="button" class="btn btn-primary toggle-button" id="sidebarZoomOutButton" style="margin: 0; background-color: #f8bc3c;">
                 <i class="fas fa-comment-dots"></i>
             </button>
-            <button type="button" class="btn btn-primary toggle-button" id="sidebarEndSessionButton" style="margin: 0;">
+            <button type="button" class="btn btn-primary toggle-button" id="sidebarEndSessionButton" style="margin: 0; background-color: #5cc0e0;">
                 <i class="fas fa-comments"></i>
             </button>
         </div>
@@ -215,37 +213,112 @@
         <div id="calendar"></div> <!-- Calendar container -->
     </div>
 
+    <div id="eventPopup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <div class="popup-buttons">
+                <h4>Adult Progress Note Mental Health</h4>
+                <button class="icon-btn">
+                    <i class="fa fa-edit"></i> <!-- Edit icon -->
+                </button>
+                <button class="icon-btn">
+                    <i class="fa fa-copy"></i> <!-- Copy icon -->
+                </button>
+                <button class="text-btn">Browse</button>
+            </div>
+            <div class="popup-row">
+                <h5>Jake Kel</h5>
+            </div>
+            <table class="popup-table">
+                <tr>
+                    <th>Header 1</th>
+                    <th>Header 2</th>
+                    <th>Header 3</th>
+                    <th>Header 4</th>
+                </tr>
+                <tr>
+                    <td>Value 1</td>
+                    <td>Value 2</td>
+                    <td>Value 3</td>
+                    <td>Value 4</td>
+                </tr>
+            </table>
+            <div id="modalityContainer">
+                <h3>Modality</h3>
+                <div id="checkboxContainer">
+                    <label>
+                        <input type="checkbox" name="modality" value="Option 1"> Option 1
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="modality" value="Option 2"> Option 2
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="modality" value="Option 3"> Option 3
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="modality" value="Option 4"> Option 4
+                    </label><br>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
+            
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
                 events: [
-                    // Example events
                     {
                         title: 'Meeting',
-                        start: '2024-09-23'
+                        start: '2024-09-23',
+                        description: 'Discuss project progress and next steps.'
                     },
                     {
                         title: 'Conference',
                         start: '2024-09-25',
-                        end: '2024-09-27'
+                        end: '2024-09-27',
+                        description: 'Annual tech conference.'
                     }
-                ],
+                ]
+,
                 eventClick: function(info) {
-                    // Display the event title in an alert or modal
-                    alert('Event: ' + info.event.title);
-                    // If you want a custom modal, you can implement it here instead of alert
+                    // Open popup
+                    var popup = document.getElementById('eventPopup');
+                    var eventTitle = document.getElementById('eventTitle');
+                    var eventDescription = document.getElementById('eventDescription');
+
+                    eventTitle.textContent = info.event.title;
+                    eventDescription.textContent = info.event.extendedProps.description || 'No description available';
+
+                    popup.style.display = 'block'; // Show the popup
                 }
             });
+
             calendar.render();
+
+            // Close popup when 'x' is clicked
+            var closeBtn = document.querySelector('.popup .close');
+            closeBtn.addEventListener('click', function() {
+                document.getElementById('eventPopup').style.display = 'none'; // Hide the popup
+            });
+
+            // Optionally, close popup when clicking outside the popup content
+            window.addEventListener('click', function(event) {
+                var popup = document.getElementById('eventPopup');
+                if (event.target == popup) {
+                    popup.style.display = 'none'; // Hide if clicked outside
+                }
+            });
         });
+
     </script>
+
+    
     
 
 </div><!-- Main Content END -->
