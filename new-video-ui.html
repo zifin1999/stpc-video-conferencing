@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Conferencing</title>
+    <title>Video Call with Whiteboard</title>
+
     <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- AWS Chime SDK -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/amazon-chime-sdk-js/2.19.0/amazon-chime-sdk.min.js"></script>
+
     <!-- Fabric.js for Whiteboard -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
+
     <style>
         #video-container {
             display: flex;
@@ -29,61 +31,49 @@
         }
     </style>
 </head>
-<body id="top">
-    <!-- Bootstrap NavBar -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#">
-            <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-            <span class="menu-collapsed">Smart Therapy PC</span>
-        </a>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">
-                        <i class="fas fa-home"></i> Home
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#top">
-                        <i class="fas fa-comment-dots"></i> Chat
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#top">
-                        <i class="fas fa-sign-out-alt"></i> Sign Out
-                    </a>
-                </li>
-            </ul>
+<body>
+
+    <div class="container">
+        <h1 class="text-center my-4">Video Call with Whiteboard</h1>
+
+        <!-- Meeting Info -->
+        <div class="row mb-4">
+            <div class="col">
+                <input type="text" id="meeting-id" class="form-control" placeholder="Meeting ID">
+            </div>
+            <div class="col">
+                <input type="text" id="attendee-id" class="form-control" placeholder="Attendee ID">
+            </div>
+            <div class="col">
+                <button id="join-button" class="btn btn-primary">Join Meeting</button>
+            </div>
         </div>
-    </nav><!-- NavBar END -->
 
+        <!-- Video Container -->
+        <div id="video-container" class="row mb-4">
+            <video id="local-video" autoplay muted></video>
+            <video id="remote-video" autoplay></video>
+        </div>
 
-    <!-- Bottom Dock for Buttons -->
-    <div id="bottom-dock" class="d-flex justify-content-between align-items-center">
-        <button id="micButton" class="dock-button">
-            <i class="fas fa-microphone"></i>
-        </button>
-        <button id="cameraButton" class="dock-button">
-            <i class="fas fa-video"></i>
-        </button>
-        <button id="settingsButton" class="dock-button">
-            <i class="fas fa-cog"></i>
-        </button>
-        <button id="chatButton" class="dock-button">
-            <i class="fas fa-comment"></i>
-        </button>
-        <button id="exitButton" class="dock-button exit-button">
-            <a href="index.html" id="exitButton" class="dock-button exit-button">
-                <i class="fas fa-sign-out-alt"></i>
-            </a>            
-        </button>
+        <!-- Whiteboard -->
+        <div class="row mb-4">
+            <div class="col">
+                <canvas id="whiteboard"></canvas>
+            </div>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="row">
+            <div class="col">
+                <button id="mute-button" class="btn btn-danger">Mute</button>
+                <button id="unmute-button" class="btn btn-success">Unmute</button>
+                <button id="start-recording" class="btn btn-warning">Start Recording</button>
+                <button id="stop-recording" class="btn btn-warning">Stop Recording</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Scripts -->
-    <!-- integration js -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
@@ -175,43 +165,6 @@
             // Send data to other participants (e.g., using Chime Data Messages or WebSockets)
             // chimeSDK.audioVideo.realtimeSendDataMessage('whiteboard-data', message, 1000);
         });
-    </script>
-    <!-- end of integration js -->
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        // Camera toggle
-        document.getElementById("cameraButton").addEventListener("click", function() {
-            const icon = this.querySelector("i");
-            this.classList.toggle("active"); // Add/remove active class
-            icon.classList.toggle("fa-video-slash"); // Toggle icon
-            icon.classList.toggle("fa-video"); // Toggle icon
-        });
-
-        // Microphone toggle
-        document.getElementById("micButton").addEventListener("click", function() {
-            const icon = this.querySelector("i");
-            this.classList.toggle("active"); // Add/remove active class
-            icon.classList.toggle("fa-microphone-slash"); // Toggle icon
-            icon.classList.toggle("fa-microphone"); // Toggle icon
-        });
-
-        // Settings toggle
-        document.getElementById("settingsButton").addEventListener("click", function() {
-            const icon = this.querySelector("i");
-            this.classList.toggle("settings-active"); // Add/remove active class
-            // You can also toggle the icon if needed
-        });
-
-        // Chat toggle
-        document.getElementById("chatButton").addEventListener("click", function() {
-            const icon = this.querySelector("i");
-            this.classList.toggle("chat-active"); // Add/remove active class
-            // You can also toggle the icon if needed
-        });
-
     </script>
 </body>
 </html>

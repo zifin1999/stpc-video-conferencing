@@ -327,7 +327,17 @@
 .video-feed {
     background-color: aquamarine;
     height: 150px;
+    display: flex; /* Center content */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    overflow: hidden; /* Prevent overflow */
 }
+
+video {
+    width: 100%; /* Make video responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
 .btn-group {
     padding: 20px; /* Outer padding */
     display: flex; /* Flexbox layout */
@@ -478,3 +488,80 @@
     border-radius: 5px; /* Rounded corners */
 }
 
+
+
+
+
+
+
+
+/* Additional CSS to keep sidebar static */
+#sidebar {
+    position: fixed;
+    top: 56px; /* Below the navbar */
+    left: 0;
+    width: 260px; /* Width of the sidebar */
+    height: calc(100% - 56px); /* Full height minus navbar */
+    background-color: #efefef;
+    color: white;
+    z-index: 1000;
+}
+#main-content {
+    margin-left: 250px; /* Offset for the sidebar */
+    padding: 20px; /* Padding for the main content */
+}
+.nav-link.active {
+    background-color: #21a8d9; /* Active background color */
+    color: white!important; /* Active text color */
+}
+#calendar {
+    width: 100%;
+    min-height: 600px; /* Ensure a minimum height */
+}
+
+.fc-button {
+    background-color: #007bff; /* Change button background color */
+    color: white; /* Change button text color */
+}
+.fc-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* whiteboard */
+#whiteboardContainer {
+    margin-top: 20px;
+}
+
+#whiteboard {
+    border: 1px solid #000;
+    background-color: #fff;
+    width: 100%;
+    height: 500px; /* Adjust as needed */
+}
+
+.button-container {
+    margin: 20px 0;
+    display: flex;
+    gap: 2px; /* Gap between buttons */
+}
+.btn-custom {
+    background-color: #21a8d9; /* Button background color */
+    color: white; /* White text */
+    width: 50px; /* Fixed width */
+    height: 50px; /* Fixed height */
+    display: flex; /* Center icon */
+    align-items: center; /* Center icon vertically */
+    justify-content: center; /* Center icon horizontally */
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Remove border */
+    transition: background-color 0.3s; /* Smooth transition for hover */
+}
+.btn-custom:hover {
+    background-color: #2bc0e4; /* Lighter background on hover */
+}
+canvas {
+    border: 1px solid black;
+    margin-top: 20px;
+    width: 100%;
+    height: 400px;
+}
