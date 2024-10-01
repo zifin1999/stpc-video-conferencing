@@ -124,14 +124,98 @@
         </div><!-- sidebar-container END -->
         
     
-        <!-- MAIN -->
         <div class="col p-4">
-            <h1 class="display-4">Home</h1>
-            <p>Dummy content is used on all pages</p>
-            <p>The pages are separated for now because the UI has not been fnalized but will be turned into a procedural layout once everything is in place</p>
-        </div><!-- Main Col END -->
-    </div><!-- body-row END -->
-    
+            <h1 class="display-4">Basic Form</h1>
+            <p>The pages are separated for now because the UI has not been finalized but will be turned into a procedural layout once everything is in place.</p>
+        
+            <!-- Form for Adding/Updating/Saving details -->
+            <form id="detailsForm">
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter Email" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phone" placeholder="Enter Phone Number" disabled>
+                </div>
+        
+                <!-- Buttons -->
+                <button type="button" class="btn btn-warning" id="editBtn" onclick="toggleEdit()">Edit</button>
+                <button type="button" class="btn btn-success" id="saveBtn" onclick="saveDetails()" disabled>Save</button>
+            </form>
+        </div>
+        
+        <script>
+        // Load the data from localStorage if available
+        document.addEventListener("DOMContentLoaded", function () {
+            loadDetails();
+        });
+        
+        // Enable input fields for editing
+        function toggleEdit() {
+            const fields = document.querySelectorAll("#detailsForm input");
+            fields.forEach(field => field.disabled = false);
+            document.getElementById('saveBtn').disabled = false;
+            document.getElementById('editBtn').disabled = true;  // Disable Edit button while editing
+        }
+        
+        // Save the details in localStorage and lock the input fields
+        function saveDetails() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+        
+            // Check if all fields are filled
+            if (!firstName || !lastName || !email || !phone) {
+                alert("Please fill in all fields.");
+                return;
+            }
+        
+            // Save details to local storage
+            const userDetails = { firstName, lastName, email, phone };
+            localStorage.setItem('userDetails', JSON.stringify(userDetails));
+        
+            // Disable input fields after saving
+            const fields = document.querySelectorAll("#detailsForm input");
+            fields.forEach(field => field.disabled = true);
+        
+            document.getElementById('saveBtn').disabled = true;
+            document.getElementById('editBtn').disabled = false;  // Re-enable Edit button after saving
+        
+            alert("Details saved successfully.");
+        }
+        
+        // Load details from localStorage and display in the form
+        function loadDetails() {
+            const savedDetails = JSON.parse(localStorage.getItem('userDetails'));
+            
+            if (savedDetails) {
+                document.getElementById('firstName').value = savedDetails.firstName;
+                document.getElementById('lastName').value = savedDetails.lastName;
+                document.getElementById('email').value = savedDetails.email;
+                document.getElementById('phone').value = savedDetails.phone;
+        
+                // Disable the fields since data is already loaded
+                const fields = document.querySelectorAll("#detailsForm input");
+                fields.forEach(field => field.disabled = true);
+        
+                document.getElementById('saveBtn').disabled = true;  // Save button is disabled after loading
+            } else {
+                // If no data is present in local storage, allow the user to edit
+                document.getElementById('editBtn').disabled = false;
+            }
+        }
+        </script>
+            
     <!-- Bootstrap and jQuery scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
